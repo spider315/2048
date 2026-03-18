@@ -1,0 +1,311 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #faf8ef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  touch-action: none;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  max-width: 540px;
+  width: 100%;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 64px;
+  font-weight: 700;
+  color: #776e65;
+  line-height: 1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-container {
+  background: #bbada0;
+  border-radius: 6px;
+  padding: 8px 20px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.score-container span:first-child {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.score-container #score {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+#new-game {
+  background: #8f7a66;
+  color: #f9f6f2;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#new-game:hover {
+  background: #9f8b77;
+}
+
+/* Instructions */
+.instructions {
+  color: #776e65;
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+/* Game wrapper for overlay positioning */
+.game-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Grid */
+.grid {
+  background: #bbada0;
+  border-radius: 8px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 500px;
+  height: 500px;
+}
+
+/* Tile */
+.tile {
+  background: rgba(238, 228, 218, 0.35);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 700;
+  color: #776e65;
+  user-select: none;
+}
+
+/* Issue #10 (SKG-25): Animations */
+.tile-new {
+  animation: tile-appear 150ms ease-out;
+}
+
+.tile-merged {
+  animation: tile-pop 200ms ease-out;
+}
+
+@keyframes tile-appear {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes tile-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Tile colors (Issue #2a / SKG-19) */
+.tile[data-value="2"] {
+  background: #eee4da;
+  color: #776e65;
+}
+
+.tile[data-value="4"] {
+  background: #ede0c8;
+  color: #776e65;
+}
+
+.tile[data-value="8"] {
+  background: #f2b179;
+  color: #f9f6f2;
+}
+
+.tile[data-value="16"] {
+  background: #f59563;
+  color: #f9f6f2;
+}
+
+.tile[data-value="32"] {
+  background: #f67c5f;
+  color: #f9f6f2;
+}
+
+.tile[data-value="64"] {
+  background: #f65e3b;
+  color: #f9f6f2;
+}
+
+.tile[data-value="128"] {
+  background: #edcf72;
+  color: #f9f6f2;
+  font-size: 40px;
+}
+
+.tile[data-value="256"] {
+  background: #edcc61;
+  color: #f9f6f2;
+  font-size: 40px;
+}
+
+.tile[data-value="512"] {
+  background: #edc850;
+  color: #f9f6f2;
+  font-size: 40px;
+}
+
+.tile[data-value="1024"] {
+  background: #edc53f;
+  color: #f9f6f2;
+  font-size: 32px;
+}
+
+.tile[data-value="2048"] {
+  background: #edc22e;
+  color: #f9f6f2;
+  font-size: 32px;
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(238, 228, 218, 0.73);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  z-index: 10;
+  animation: fade-in 300ms ease-out;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.overlay-content {
+  text-align: center;
+}
+
+.overlay-content h2 {
+  font-size: 48px;
+  color: #776e65;
+  margin-bottom: 20px;
+}
+
+#overlay-btn {
+  background: #8f7a66;
+  color: #f9f6f2;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#overlay-btn:hover {
+  background: #9f8b77;
+}
+
+/* Footer */
+footer {
+  margin-top: 20px;
+  color: #776e65;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+/* Issue #11 (SKG-26): RWD */
+@media (max-width: 600px) {
+  .container {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .grid {
+    width: 90vw;
+    height: 90vw;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .tile {
+    font-size: 32px;
+  }
+
+  .tile[data-value="128"],
+  .tile[data-value="256"],
+  .tile[data-value="512"] {
+    font-size: 26px;
+  }
+
+  .tile[data-value="1024"],
+  .tile[data-value="2048"] {
+    font-size: 20px;
+  }
+
+  .score-container {
+    padding: 6px 14px;
+    min-width: 60px;
+  }
+
+  .score-container #score {
+    font-size: 18px;
+  }
+
+  #new-game {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .overlay-content h2 {
+    font-size: 36px;
+  }
+}

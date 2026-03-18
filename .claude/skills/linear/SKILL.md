@@ -107,6 +107,26 @@ Filter further with `state`, `priority`, `label`, `project`, `team`, `createdAt`
 
 ## Key Concepts
 
+**Markdown in descriptions/comments** — When passing `description` or `body` content to Linear tools (`save_issue`, `save_comment`, `create_document`, `update_document`), you MUST use actual newlines in the parameter value. NEVER use literal `\n` escape sequences — they will render as visible `\n` text in Linear instead of line breaks. Simply write the markdown content with real line breaks in the parameter block.
+
+Correct:
+```
+description: |
+  ## 目標
+
+  建立 2048 遊戲的基礎專案架構。
+
+  ## 需求
+
+  - 建立 `index.html`
+  - 建立 `style.css`
+```
+
+Wrong (will show literal \n):
+```
+description: "## 目標\n建立 2048 遊戲的基礎專案架構。\n\n## 需求\n- 建立 `index.html`\n- 建立 `style.css`"
+```
+
 **Identifiers** — Most tools accept flexible identifiers:
 - Issues: ID or identifier like `LIN-123`
 - Teams: UUID, key (e.g., `ENG`), or display name
